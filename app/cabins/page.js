@@ -1,3 +1,3 @@
 export default function Page() {
-	return <>Cabins page</>;
+	return <div className="bg-slate-300">Cabins page</div>;
 }
