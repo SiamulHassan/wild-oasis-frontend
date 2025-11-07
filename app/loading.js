@@ -1,5 +1,7 @@
+import { Spinner } from '@/components';
+
 const Loading = () => {
-	return <div>LOADING ... </div>;
+	return <Spinner />;
 };
 
 export default Loading;

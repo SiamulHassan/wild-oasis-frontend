@@ -6,3 +6,5 @@ export { default as ReservationCard } from './ReservationCard';
 export { default as ReservationForm } from './ReservationForm';
 export { default as ReservationReminder } from './ReservationReminder';
 export { default as SideNavigation } from './SideNavigation';
+export { default as Spinner } from './Spinner';
+export { default as SpinnerMini } from './SpinnerMini';
