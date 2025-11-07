@@ -1,17 +1,15 @@
-import localFont from 'next/font/local';
 import './globals.css';
-import Navigation from '@/components/reusables/Navigation';
-import Logo from '@/components/reusables/Logo';
+import { Josefin_Sans } from 'next/font/google';
+import { Header } from '@/components';
 
-const geistSans = localFont({
-	src: './fonts/GeistVF.woff',
-	variable: '--font-geist-sans',
-	weight: '100 900',
-});
-const geistMono = localFont({
-	src: './fonts/GeistMonoVF.woff',
-	variable: '--font-geist-mono',
-	weight: '100 900',
+// const geistSans = localFont({
+// 	src: './fonts/GeistVF.woff',
+// 	variable: '--font-geist-sans',
+// 	weight: '100 900',
+// });
+const josefin = Josefin_Sans({
+	subset: ['latin'],
+	display: 'swap',
 });
 
 export const metadata = {
@@ -23,13 +21,12 @@ export default function RootLayout({ children }) {
 	return (
 		<html lang='en'>
 			<body
-				className={`${geistSans.variable} ${geistMono.variable} antialiased bg-primary-950 text-primary-100 min-h-screen`}
+				className={`${josefin.className} antialiased bg-primary-950 text-primary-100 min-h-screen flex flex-col`}
 			>
-				<div>
-					<Navigation />
-					<Logo />
+				<Header />
+				<div className='flex-1 px-8 py-12 grid'>
+					<main className='max-w-7xl mx-auto w-full'>{children}</main>
 				</div>
-				<main>{children}</main>
 			</body>
 		</html>
 	);
