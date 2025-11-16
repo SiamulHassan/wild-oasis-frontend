@@ -1,16 +1,36 @@
-import { getCabin } from '@/lib/datas';
+import TextExpander from '@/components/reusables/TextExpander';
+import { getCabin, getCabins } from '@/lib/datas';
 import { EyeSlashIcon, MapPinIcon, UsersIcon } from '@heroicons/react/24/solid';
 import Image from 'next/image';
+import { notFound } from 'next/navigation';
 
 export const generateMetadata = async ({ params }) => {
 	const paramsVal = await params;
 	const { name } = await getCabin(paramsVal.cabinId);
 	return { title: `Cabin ${name}` };
 };
+// thats it for ssg
+// export async function generateStaticParams() {
+// 	const cabins = await getCabins();
+// 	// note: cabinid ke object hisabe retrun kora hocce and object key holo 'cabinId' ja params er key [cabinId]
+// 	const cabinIds = cabins.map(cabin => ({
+// 		cabinId: String(cabin.id),
+// 	}));
+// 	return cabinIds;
+// }
 
 export default async function Page({ params }) {
 	const paramsVal = await params;
 	const cabin = await getCabin(paramsVal.cabinId);
+	// Option 1
+	// manually trigarring the not found page
+	if (!cabin) {
+		notFound();
+	}
+	// Option 2
+	// or we can also declare a not-found page for this page route for more specific not found error
+	// In this case we also need to call the notFound function as it will trigger the nearest not-found page which is our this id page route level
+
 	const { id, name, maxCapacity, regularPrice, discount, image, description } =
 		cabin;
 
@@ -31,7 +51,9 @@ export default async function Page({ params }) {
 						Cabin {name}
 					</h3>
 
-					<p className='text-lg text-primary-300 mb-10'>{description}</p>
+					<p className='text-lg text-primary-300 mb-10'>
+						<TextExpander>{description}</TextExpander>
+					</p>
 
 					<ul className='flex flex-col gap-4 mb-7'>
 						<li className='flex gap-3 items-center'>
